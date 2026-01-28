@@ -1,0 +1,7 @@
+{
+  "name": "flowlift – Bookings",
+  "description": "A production-grade, multi-tenant booking SaaS for businesses. Features include customer-facing booking links, staff management, tiered subscriptions, and automated email notifications via Resend.",
+  "requestFramePermissions": [
+    "geolocation"
+  ]
+}
