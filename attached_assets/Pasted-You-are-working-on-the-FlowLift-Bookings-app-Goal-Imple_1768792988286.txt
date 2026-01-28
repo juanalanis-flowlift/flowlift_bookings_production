@@ -1,0 +1,140 @@
+You are working on the FlowLift Bookings app.
+
+Goal:
+Implement a required “Business Profile Setup” onboarding wizard for NEW business owners immediately after signup (first login). This wizard prepares the minimum viable business profile before the user can add services or activate bookings.
+
+CRITICAL DESIGN CONSTRAINT (DO NOT IGNORE):
+* All onboarding steps MUST follow the layout and structure shown in:
+  onboardingScreenDesign.png
+* This layout is the canonical onboarding screen design and must be reused for ALL steps (desktop and mobile responsive).
+* Use FlowLift’s existing design system (colors, typography, spacing, buttons).
+* Do NOT invent new layouts, card structures, or navigation patterns.
+
+Each step below also has a functional reference image. These images define:
+* Which fields appear on that step
+* The content and intent of the step
+They do NOT override the base layout defined in onboardingScreenDesign.png.
+
+Image references:
+* Global layout reference (all steps): onboardingScreenDesign.png
+* Step 0 content reference: flowlift_onboarding_step0.png
+* Step 1 content reference: flowlift_onboarding_step1.png
+* Step 2 content reference: flowlift_onboarding_step2.png
+* Step 3 content reference: flowlift_onboarding_step3.png
+* Step 4 content reference: flowlift_onboarding_step4.png
+
+Trigger & scope:
+* This onboarding runs ONLY for new business owners whose business profile is not yet completed.
+* Completion state must be stored at the BUSINESS / ORGANIZATION level, not user level.
+* If a user exits mid-flow, resume at the last incomplete step on next login.
+
+Hard gating rules:
+Until onboarding is completed:
+* Block access to “Add Services”
+* Block making the booking page public
+* Block any navigation that implies the business is active
+* Redirect blocked actions back into the onboarding flow with a friendly message:
+  “Complete your business profile to activate bookings.”
+
+Wizard behavior:
+* Linear, step-by-step flow
+* Back / Continue navigation
+* Visible progress indicator (e.g. Step X of 5 or circular %)
+* Auto-save data on Continue
+* Required fields must be validated before allowing Continue
+* No skipping required steps
+
+Minimum Viable Profile (required to complete onboarding):
+* Business name (required)
+* Category (required)
+* Description (required)
+* City (required)
+* Country (required)
+* Contact email (required)
+* Language (required)
+
+Optional (must NOT block completion):
+* Phone number
+* Social media usernames
+* Logo upload
+* Appearance (light / dark)
+
+Defaults:
+* Language: preselect from browser/OS if possible (English / Español)
+* Country: prefill if available, otherwise require selection
+* Appearance: optional preference only
+
+Validation rules:
+* Required fields must be non-empty
+* Email must be valid format
+* Category must be selected from allowed list
+* City and Country required
+* Validation errors must be inline and friendly (no technical language)
+
+STEP DEFINITIONS (use onboardingScreenDesign.png layout for ALL):
+
+Step 0 – Intro / framing
+Image reference: flowlift_onboarding_step0.png
+* Show intro message: “Let’s set up your business profile (2–3 minutes).”
+* Show progress indicator
+* CTA: “Start setup”
+* No fields
+* Continue → Step 1
+
+Step 1 – Business identity
+Image reference: flowlift_onboarding_step1.png
+* Fields:
+  - Business name (required)
+  - Category dropdown (required)
+  - Logo upload / Change Logo (optional)
+* Continue disabled until required fields complete
+* Back → Step 0
+
+Step 2 – Public-facing credibility
+Image reference: flowlift_onboarding_step2.png
+* Fields:
+  - Description (required)
+* Include helpful placeholder example text
+* Continue disabled until description is filled
+* Back → Step 1
+
+Step 3 – Location & contact basics
+Image reference: flowlift_onboarding_step3.png
+* Fields:
+  - Address (optional, only if present in image)
+  - City (required)
+  - Country (required)
+  - Phone (required)
+  - Email (required)
+* Email format validation required
+* Back → Step 2
+
+Step 4 – Preferences & completion
+Image reference: flowlift_onboarding_step4.png
+* Fields:
+  - Language selector (required: English / Español)
+  - Appearance toggle (optional)
+* Completion state:
+  - Show confirmation: “Your business profile is ready”
+  - Primary CTA: “Continue to add your first service”
+  - On click:
+    - Set onboardingComplete = true for this business
+    - Unlock full app navigation
+    - Route user to the Services creation flow
+
+Navigation constraints:
+* While onboardingComplete = false:
+  - Hide the full Business settings tabs
+  - Any deep-link attempts redirect to the onboarding wizard
+* After completion:
+  - Normal Business settings become available
+
+Implementation expectations:
+* Reuse onboardingScreenDesign.png layout exactly for all steps. vertical layout for mobile, adjust illustrations height to allow a good fit of the form. Horizontal layout for desktop, also adjust image size to best fit the elements.
+* Responsive for mobile and desktop
+* Clean integration with existing FlowLift routing and state
+* No extra steps, no extra fields, no layout deviations
+
+Final instruction:
+Do NOT invent additional steps, screens, or layouts.
+Follow onboardingScreenDesign.png for structure and the step images only for content.

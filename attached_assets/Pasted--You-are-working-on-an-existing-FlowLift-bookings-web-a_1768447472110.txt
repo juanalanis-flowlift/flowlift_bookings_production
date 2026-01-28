@@ -1,0 +1,84 @@
+	You are working on an existing FlowLift bookings web app. The app already has these main sections/screens: Dashboard (Overview), Services, Team, Bookings (List + Calendar + Team Load), Availability (Working Hours + Block Time Off), and Business. Implement a 3-tier system (Starter, Pro+, Teams) inside the existing UI with minimal friction.
+	
+	GOAL
+	1) Keep the app fully usable for Starter users (they must be able to run bookings end-to-end).
+	2) Make higher-tier features visible in a “soft” way (placeholders + subtle labels), without annoying popups.
+	3) Only show upgrade prompts when the user tries to use a gated feature.
+	
+	TIERS (3)
+	- Starter (Free): solo operator, basic bookings, no customization.
+	- Pro+: solo professional, multiple services, photos + branding + booking rules + QR code + basic integrations.
+	- Teams: multi-staff operations: team management, staff assignment, per-person availability, workload/team views, and advanced integrations.
+	
+	GLOBAL NAVIGATION RULES
+	- Team menu item is visible ONLY for Teams tier. Hide it completely for Starter and Pro+.
+	- If a non-Teams user tries to access Team via direct URL or link, show the upgrade explanation (not an error page).
+	
+	BUSINESS SECTION 
+	
+	1) Business → Profile:
+	   - Business name, category, description, location, contact info, social links (available for all tiers)
+	2) Business → Booking Page:
+	   - Booking page URL (all tiers)
+	   - QR code (Pro+)
+	   - Logo and cover image (Pro+)
+	   - “Show photos in booking page” toggle (Pro+)
+	3) Business → Policies:
+	   - Terms & Conditions text 
+	   - Toggles: “Show on booking page” and “Include in email” 
+	Keep Policies available to all tiers.
+	
+	SCREEN-BY-SCREEN FUNCTIONALITY (GATE / MOVE / HIDE)
+	
+	A) DASHBOARD / OVERVIEW
+	- Starter: show "last week", "todays booking" and “next 7 days”. Hide advanced metric cards such as “Completed Bookings Last Week”, "Daily Occupation Rate" and “Booked Services Last Week”.
+	- Pro+/Teams: show the metric cards.
+	
+	B) SERVICES
+	Common to all tiers: service name, description, duration, price, tags, active toggle, and “requires confirmation” toggle.
+	- Starter:
+	  - Limit to 1 total service. Once they reach the limit, disable “Add Service” and show a subtle inline message: “Available in Pro+”.
+	  - Do NOT show service image upload controls.
+	- Pro+:
+	  - Allow multiple services.
+	- Teams:
+	  - Everything in Pro+, plus staff assignment inside the service editor (assign which staff can perform each service).
+	
+	C) TEAM (Teams tier only)
+	- Hide Team section completely for Starter and Pro+.
+	
+	D) BOOKINGS
+	- All tiers: List and Calendar tabs remain available.
+	- Teams only:
+	  - Show “Team Load” tab
+	  - Allow filtering by staff
+	  - Allow booking team member reassignment (if supported)
+	- Starter/Pro+: hide the Team Load tab completely (do not show a disabled tab).
+	
+	E) AVAILABILITY
+	- All tiers: weekly working hours and blocked time off exist.
+	- Starter:
+	  - Block time off must be single-day only (no multi-day ranges).
+	- Pro+/Teams:
+	  - Allow multi-day date ranges for blocked time off and vacation ranges.
+	- Teams:
+	  - Availability per staff member (individual schedules and time off).
+	
+	F) INTEGRATIONS / CALENDAR SYNC (if present in UI)
+	- Customer “Add to calendar” buttons/links after booking confirmation must remain available to all tiers.
+	
+	UPGRADE EXPERIENCE (MINIMAL FRICTION)
+	- Do not show upgrade popups on page load.
+	- Softly show gated features using placeholders + small labels:
+	  - “Available in Pro+” or “Available in Teams”
+	- Only when the user clicks a gated control, show ONE reusable upgrade modal (same design everywhere):
+	  Modal content structure:
+	  - Title: context-specific (e.g., “Add photos to your services” / “Manage your team”)
+	  - Up to 4 bullets explaining what they get
+	  - Buttons: “Upgrade to Pro+” or “Upgrade to Teams”, plus “Not now”
+	- Do not block users from viewing the screen; only block the specific action.
+	
+	FINAL CHECKS (must pass)
+	- Starter can: create 1 service, set working hours, accept bookings, view/manage bookings, and customers can complete the booking flow.
+	- Pro+ can: add multiple services, upload service photos,  use QR code, and manage booking rules.
+	- Teams can: manage team members, assign services to staff, manage staff availability, and access Team Load.

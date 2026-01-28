@@ -1,0 +1,42 @@
+You are building an MVP web application for FlowLift, a SaaS platform for small service businesses. This product is a generic booking web app (web only, no native mobile app) that lets customers book services like haircuts, barber appointments, inflatable rentals, etc.
+
+Please create a complete but simple MVP that I can run fully inside Replit.
+
+GOAL
+- Allow small businesses or solo providers to manage their services and availability.
+- Allow customers to book available slots through a clean, simple web interface.
+- Design it as a multi-tenant SaaS: each business sees only its own data, and each business has its own public booking page.
+
+TECH (keep it simple and standard for Replit)
+- Use a modern web stack supported by Replit (for example: React + TypeScript on the frontend and a Node.js/Express backend with a simple database such as PostgreSQL or SQLite).
+- Include a clear README explaining how to run the app inside Replit.
+
+USER ROLES
+1) Business user (owner/manager)
+   - Sign up / log in with email and password.
+   - Create and edit a business profile: business name, description, address (city, country), phone, email, logo or placeholder image, main category (e.g., barber, hairdresser, inflatable rentals).
+   - Define services: service name, short description, duration (minutes), price, tags (e.g., “haircut”, “kids party”, “inflatable”).
+   - Set availability: working days, working hours, slot length per service, and days closed or blocked time.
+   - View and manage bookings in a simple dashboard (list or calendar view): customer name, service, date, time, status (pending, confirmed, cancelled), and notes.
+   - Ability to change booking status (confirm, cancel) and optionally add internal notes.
+
+2) Customer (no login required)
+   - Access a public booking page via a unique URL for each business.
+   - See business info and list of services with duration and price.
+   - Choose a service, then pick an available date and time based on the business schedule.
+   - Fill in a simple booking form: name, email, phone (optional), and notes (e.g., “birthday party, 10 kids”).
+   - Submit booking and see a clear confirmation screen. If possible, prevent double-bookings by disabling already-taken slots.
+
+KEY REQUIREMENTS
+- Multi-tenant: support multiple businesses in the same app. Each business user should only see their own business, services, and bookings. Each business gets its own public booking URL.
+- Basic validation on forms (required fields, valid email, no past dates).
+- Basic analytics for the business user: show total upcoming bookings and bookings in the last 30 days.
+- Responsive, mobile-friendly layout with a clean, minimal design. Use neutral colors that can later be aligned to the FlowLift brand.
+- Seed the database with a few example businesses (e.g., a barber shop, a hairdresser, and an inflatable rental) so I can see how it works immediately.
+
+DELIVERABLES
+- Working code for the full stack (frontend + backend + database config) that runs inside Replit.
+- Clear file structure.
+- A README with short instructions: how to run the app, where to change configuration, and where to adjust branding later.
+
+Focus on clarity, simplicity, and a good booking experience over complex features.
